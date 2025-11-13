@@ -1,2 +1,6 @@
-﻿public class PodcastFactory {
+﻿public class PodcastFactory implements ArticleFactory {
+    @Override
+    public Article createArticle(String title, String content, String author) {
+        return null;
+    }
 }

@@ -1,6 +1,11 @@
 ﻿import java.time.LocalDateTime;
 
-public abstract class Article {
+public abstract class Article implements Comparable<Article>{
+    @Override
+    public int compareTo(Article o) {
+        return 0;
+    }
+
     String author;
     String title;
     LocalDateTime publicationTime;
