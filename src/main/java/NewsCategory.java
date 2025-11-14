@@ -1,4 +1,4 @@
-﻿public enum NewsCategory {
+public enum NewsCategory {
     CULTURE,
     LIFESTYLE,
     POLITICS,

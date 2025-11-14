@@ -1,4 +1,4 @@
-﻿import java.time.LocalDateTime;
+import java.time.LocalDateTime;
 
 public class Podcast extends Article {
     int duration;
