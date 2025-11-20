@@ -23,4 +23,8 @@ public class NewsAgency {
     public void releaseArticle(){
         articles.remove(latestReleasedArticle); // was ist latestReleasedArticle?
     }
+
+    public void addArticlesFromFile(String s, ArticleFactory articleFactory) {
+        
+    }
 }
