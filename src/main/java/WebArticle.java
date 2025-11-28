@@ -8,14 +8,17 @@ public class WebArticle extends Article {
     }
 
     public void setLink(String link) {
-        if (!(link.contains("http://") || link.contains("https://"))) {
+        if ( link == null || !(link.contains("http://") || link.contains("https://"))) {
             throw new IllegalArgumentException("Link must not be null and start with http:// or https://!");
         }
         this.link = link;
     }
 
     public WebArticle(String author, String title, LocalDateTime publicationTime, NewsCategory category, String link) {
-        if (!(link.contains("http://") || link.contains("https://"))) {
+        if(author == null || author.isBlank()) {
+            throw new IllegalArgumentException("Author must not be null or blank!");
+        }
+        if (link == null || !(link.contains("http://") || link.contains("https://"))) {
             throw new IllegalArgumentException("Link must not be null and start with http:// or https://!");
         }
         if (title == null || title.trim().isEmpty()) {
@@ -33,7 +36,7 @@ public class WebArticle extends Article {
         // 27 zeichen + ...
         int maxLength = 30;
         if (super.title.length() <= maxLength)
-            return super.title.substring(0, maxLength);
+            return super.title;
 
 
         return super.title.substring(0, maxLength - 3) + "...";

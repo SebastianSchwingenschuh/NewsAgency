@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 public abstract class Article implements Comparable<Article>{
     @Override
     public int compareTo(Article o) {
-        return 0;
+        return this.publicationTime.compareTo(o.publicationTime);
     }
 
     String author;
