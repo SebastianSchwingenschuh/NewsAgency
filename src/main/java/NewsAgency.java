@@ -1,10 +1,13 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.PriorityQueue;
 
 public class NewsAgency {
-    PriorityQueue<Article> articles = new PriorityQueue<>();
+    PriorityQueue<Article> articles = new PriorityQueue<>(
+        (a, b) -> a.getPublicationTime().compareTo(b.getPublicationTime())
+    );
     Article latestReleasedArticle = null;
 
     public Article getLatestReleasedArticle() {
@@ -16,37 +19,34 @@ public class NewsAgency {
             articles.add(article);
         }
     }
-    
-    public void addArticlesFromFile(Article article) {
-        articles.add(article);
-    }
-    
+
     public boolean hasMoreArticles() {
         return !articles.isEmpty();
     }
-    
-    public void releaseArticle(){
-        latestReleasedArticle = getOldestArticle();
-        if(latestReleasedArticle == null){
-            throw new NewsException("No articles to release!");
-        }
-        articles.remove(latestReleasedArticle);
-    }
 
     private Article getOldestArticle() {
-        Article oldestArticle = articles.peek();
-        for (Article article : articles) {
-            if (article.getPublicationTime().isBefore(oldestArticle.getPublicationTime()))
-                oldestArticle = article;
+        return articles.peek(); // O(1), returns head
+    }
+
+    public void releaseArticle() {
+        Article article = articles.poll(); // O(log n), removes and returns head
+        if (article == null) {
+            throw new NewsException("No articles to release!");
         }
-        return oldestArticle;
+        latestReleasedArticle = article;
     }
 
     public void addArticlesFromFile(String s, ArticleFactory articleFactory) {
-        if(!Files.exists(Path.of(s))){
-            IOException ioException = new IOException("Oh no, something happened while loading from file!");
-            throw new NewsException("Oh no, something happened while loading from file!",  ioException);
+        try{
+            List<String> lines = Files.readAllLines(Path.of(s));
+            // Parse lines using factory and add articles
+            for (String line : lines) {
+                Article article = articleFactory.createFromString(line);
+                if (article != null) addArticle(article);
+            }
         }
-        File
+        catch(IOException e){
+            throw new NewsException("Oh no, something happened while loading from file!", e);
+        }
     }
 }

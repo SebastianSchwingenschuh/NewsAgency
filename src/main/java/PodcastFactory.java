@@ -11,7 +11,16 @@ public class PodcastFactory implements ArticleFactory {
             fields[i] = fields[i].trim();
         }
 
-        if(fields.length != 5 || fields[2].isEmpty() || fields[3].isEmpty() || Integer.parseInt(fields[4]) == 0){
+        if (fields.length != 5 || fields[2].isEmpty() || fields[3].isEmpty()) {
+            return null;
+        }
+        int duration;
+        try {
+            duration = Integer.parseInt(fields[4]);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+        if (duration <= 0) {
             return null;
         }
 
