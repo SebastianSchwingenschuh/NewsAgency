@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -42,7 +43,7 @@ public class NewsAgency {
             // Parse lines using factory and add articles
             for (String line : lines) {
                 Article article = articleFactory.createFromString(line);
-                if (article != null) addArticle(article);
+                addArticle(article);
             }
         }
         catch(IOException e){
