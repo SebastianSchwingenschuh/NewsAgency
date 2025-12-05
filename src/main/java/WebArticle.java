@@ -35,11 +35,11 @@ public class WebArticle extends Article {
     public String getTitleTruncated() {
         // 27 zeichen + ...
         int maxLength = 30;
-        if (super.title.length() <= maxLength)
-            return super.title;
+        if (title.length() <= maxLength)
+            return title;
 
 
-        return super.title.substring(0, maxLength - 3) + "...";
+        return title.substring(0, maxLength - 3) + "...";
     }
 
     @Override
