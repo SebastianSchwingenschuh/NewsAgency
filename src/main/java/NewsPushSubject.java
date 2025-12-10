@@ -1,8 +1,23 @@
-public class NewsPushSubject extends NewsAgency{
+import java.util.ArrayList;
+import java.util.List;
 
-    public void registerObserver(ArticleReader reader) {
+public class NewsPushSubject extends NewsAgency{
+    List<NewsPushObserver> observers = new ArrayList<NewsPushObserver>();
+    public void registerObserver(NewsPushObserver observer) {
+        if(observer != null &&  !observers.contains(observer))
+            observers.add(observer);
     }
 
-    public void unregisterObserver(ArticleReader reader) {
+    public void unregisterObserver(NewsPushObserver observer) {
+        if(observer != null)
+            observers.remove(observer);
+    }
+
+    @Override
+    public void releaseArticle() {
+        super.releaseArticle();
+        for (NewsPushObserver observer : observers){
+            observer.update(this.latestReleasedArticle);
+        }
     }
 }
