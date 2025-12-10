@@ -1,4 +1,4 @@
-﻿public abstract class ArticleReader {
+public abstract class ArticleReader {
     protected int articlesReadCount;
 
     public int getArticlesReadCount() {

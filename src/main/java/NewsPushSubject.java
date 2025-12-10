@@ -1,4 +1,4 @@
-﻿public class NewsPushSubject extends NewsAgency{
+public class NewsPushSubject extends NewsAgency{
 
     public void registerObserver(ArticleReader reader) {
     }

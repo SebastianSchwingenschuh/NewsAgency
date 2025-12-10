@@ -1,3 +1,3 @@
-﻿public interface NewsPushObserver {
+public interface NewsPushObserver {
     void update(Article article);
 }
